@@ -3,6 +3,7 @@ const app = express()
 const taskRouter = require('./routes/tasks')
 const connectDB = require('./db/connect')
 require('dotenv').config()
+const notfound = require('./middleware/notfound')
 const port = 5000
 
 const start = async () => {
@@ -24,6 +25,7 @@ app.use(express.json())
 app.use(express.static('./public'))
 // parse form data
 app.use(express.urlencoded({extended: false}))
+app.use(notfound)
 
 app.get('/', (req, res) => {
     res.send('Hello')
